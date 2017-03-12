@@ -1,0 +1,14 @@
+C:\Users\malvo_000\Desktop\Dropbox\Hogeschool Rotterdam - Giulia\2014-15 - OP4 - Data mining\Practicum opdrachten\Genetic Algorithms - Main loop code\GeneticAlgorithm\bin\Debug\GeneticAlgorithm.exe.config
+C:\Users\malvo_000\Desktop\Dropbox\Hogeschool Rotterdam - Giulia\2014-15 - OP4 - Data mining\Practicum opdrachten\Genetic Algorithms - Main loop code\GeneticAlgorithm\bin\Debug\GeneticAlgorithm.exe
+C:\Users\malvo_000\Desktop\Dropbox\Hogeschool Rotterdam - Giulia\2014-15 - OP4 - Data mining\Practicum opdrachten\Genetic Algorithms - Main loop code\GeneticAlgorithm\bin\Debug\GeneticAlgorithm.pdb
+C:\Users\malvo_000\Desktop\Dropbox\Hogeschool Rotterdam - Giulia\2014-15 - OP4 - Data mining\Practicum opdrachten\Genetic Algorithms - Main loop code\GeneticAlgorithm\obj\Debug\GeneticAlgorithm.exe
+C:\Users\malvo_000\Desktop\Dropbox\Hogeschool Rotterdam - Giulia\2014-15 - OP4 - Data mining\Practicum opdrachten\Genetic Algorithms - Main loop code\GeneticAlgorithm\obj\Debug\GeneticAlgorithm.pdb
+E:\Dropbox\INF_Jaar_3\Data Science 2\Genetic Algorithms - Csharp Main loop code\GeneticAlgorithm\bin\Debug\GeneticAlgorithm.exe.config
+E:\Dropbox\INF_Jaar_3\Data Science 2\Genetic Algorithms - Csharp Main loop code\GeneticAlgorithm\obj\Debug\GeneticAlgorithm.exe
+E:\Dropbox\INF_Jaar_3\Data Science 2\Genetic Algorithms - Csharp Main loop code\GeneticAlgorithm\obj\Debug\GeneticAlgorithm.pdb
+E:\Dropbox\INF_Jaar_3\Data Science 2\GeneticAlgorithm\GeneticAlgorithm\bin\Debug\GeneticAlgorithm.exe.config
+E:\Dropbox\INF_Jaar_3\Data Science 2\GeneticAlgorithm\GeneticAlgorithm\obj\Debug\GeneticAlgorithm.exe
+E:\Dropbox\INF_Jaar_3\Data Science 2\GeneticAlgorithm\GeneticAlgorithm\obj\Debug\GeneticAlgorithm.pdb
+E:\Dropbox\INF_Jaar_3\Data Science 2\GeneticAlgorithm\GeneticAlgorithm\bin\Debug\GeneticAlgorithm.exe
+E:\Dropbox\INF_Jaar_3\Data Science 2\GeneticAlgorithm\GeneticAlgorithm\bin\Debug\GeneticAlgorithm.pdb
+E:\Dropbox\INF_Jaar_3\Data Science 2\GeneticAlgorithm\GeneticAlgorithm\obj\Debug\GeneticAlgorithm.csprojResolveAssemblyReference.cache
