@@ -63,7 +63,7 @@ namespace GeneticAlgorithm
                 for (int newInd = startIndex; newInd < populationSize; newInd++)
                 {
                     // select two parents
-                    var parents = getTwoParents();
+                    var parents = SelectTwoParents(currentPopulation, fitnesses);
 
                     // do a crossover between the selected parents to generate two children (with a certain probability, crossover does not happen and the two parents are kept unchanged)
                     Tuple<Ind, Ind> offspring;
@@ -105,23 +105,48 @@ namespace GeneticAlgorithm
 
         private double ComputeFitness(Ind individual)
         {
-            throw new NotImplementedException();
+            var bitsToInt = Convert.ToInt32(individual.bits, 2);
+            var fitness = -(Math.Pow(bitsToInt, 2)) + (7 * bitsToInt);
+            return fitness;
         }
 
-        private Func<Tuple<Ind,Ind>> SelectTwoParents(Ind[] currentPopulation, double[] fitnesses)
+        private Tuple<Ind,Ind> SelectTwoParents(Ind[] currentPopulation, double[] fitnesses)
         {
-            throw new NotImplementedException();
+            var totalProbability = fitnesses.Sum();
+            var probabilitySelection = Enumerable.Range(0, populationSize).Select(i => fitnesses[i]/totalProbability).ToArray();
+
+            var randomSelectorP1 = r.NextDouble();
+            var randomSelectorP2 = r.NextDouble();
+            var currentProbability = 0.0;
+            Ind parent1 = new Ind();
+            Ind parent2 = new Ind();
+
+            for (int i = 0; i < currentPopulation.Count(); i++) {
+                currentProbability += probabilitySelection[i];
+                if (currentProbability >= randomSelectorP1) {
+                    parent1 = currentPopulation[i];
+                }
+                if (currentProbability >= randomSelectorP2)
+                {
+                    parent2 = currentPopulation[i];
+                }
+            }
+
+            var parents = new Tuple<Ind, Ind>(parent1, parent2);
+            return parents;
+            //throw new NotImplementedException();
         }
 
         private Tuple<Ind,Ind> Crossover(Tuple<Ind,Ind> parents)
         {
+            
             throw new NotImplementedException();
         }
 
         private Ind Mutation(Ind child, double mutationRate) 
         {
             for (int i = 0; i < child.bits.Count(); i++) {
-                if (mutationRate > r.NextDouble()) {
+                if (r.NextDouble() < mutationRate) {
                     StringBuilder sb = new StringBuilder(child.bits);
                     sb[i] = ('0' == child.bits[i] ? '1' : '0');
                     child.bits = sb.ToString();
