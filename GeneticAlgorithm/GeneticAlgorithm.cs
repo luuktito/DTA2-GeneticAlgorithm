@@ -78,20 +78,12 @@ namespace GeneticAlgorithm
                         nextPopulation[newInd] = Mutation(offspring.Item2, mutationRate);
                 }
 
-                // the new population becomes the current one
-                //currentPopulation = nextPopulation;
-                
-                //Console.WriteLine("iteration: " + generation);
-
-                //for (int i = 0; i < currentPopulation.Count(); i++) {
-                //    Console.WriteLine(currentPopulation[i].bits);
-                //    currentPopulation[i] = Mutation(currentPopulation[i], mutationRate);
-                //}
+                //the new population becomes the current one
+                currentPopulation = nextPopulation;
 
                 //in case it's needed, check here some convergence condition to terminate the generations loop earlier
             }
 
-            //return currentPopulation.First();
             //recompute the fitnesses on the final population and return the best individual
             var finalFitnesses = Enumerable.Range(0, populationSize).Select(i => ComputeFitness(currentPopulation[i])).ToArray();
             return currentPopulation.Select((individual, index) => new Tuple<Ind, double>(individual, finalFitnesses[index])).OrderByDescending(tuple => tuple.Item2).First().Item1;
@@ -115,18 +107,16 @@ namespace GeneticAlgorithm
             var totalProbability = fitnesses.Sum();
             var probabilitySelection = Enumerable.Range(0, populationSize).Select(i => fitnesses[i]/totalProbability).ToArray();
 
-            var randomSelectorP1 = r.NextDouble();
-            var randomSelectorP2 = r.NextDouble();
             var currentProbability = 0.0;
             Ind parent1 = new Ind();
             Ind parent2 = new Ind();
 
             for (int i = 0; i < currentPopulation.Count(); i++) {
                 currentProbability += probabilitySelection[i];
-                if (currentProbability >= randomSelectorP1) {
+                if (currentProbability >= r.NextDouble()) {
                     parent1 = currentPopulation[i];
                 }
-                if (currentProbability >= randomSelectorP2)
+                if (currentProbability >= r.NextDouble())
                 {
                     parent2 = currentPopulation[i];
                 }
@@ -134,34 +124,35 @@ namespace GeneticAlgorithm
 
             var parents = new Tuple<Ind, Ind>(parent1, parent2);
             return parents;
-            //throw new NotImplementedException();
         }
 
+        //New child is made using singlepoint crossover
         private Tuple<Ind,Ind> Crossover(Tuple<Ind,Ind> parents)
         {
-            
-            throw new NotImplementedException();
+            var crossoverIndex = (digits / 2);
+            Ind child1 = new Ind();
+            Ind child2 = new Ind();
+
+            child1.bits = parents.Item1.bits.Substring(0, crossoverIndex) + parents.Item2.bits.Substring((crossoverIndex), (digits - crossoverIndex));
+            child2.bits = parents.Item2.bits.Substring(0, crossoverIndex) + parents.Item1.bits.Substring((crossoverIndex), (digits - crossoverIndex));
+
+            var newChildren = new Tuple<Ind, Ind>(child1, child2);
+            return newChildren;
         }
 
         private Ind Mutation(Ind child, double mutationRate) 
         {
-            for (int i = 0; i < child.bits.Count(); i++) {
+            StringBuilder sbChild = new StringBuilder(child.bits);
+
+            for (int i = 0; i < digits; i++) {
                 if (r.NextDouble() < mutationRate) {
-                    StringBuilder sb = new StringBuilder(child.bits);
-                    sb[i] = ('0' == child.bits[i] ? '1' : '0');
-                    child.bits = sb.ToString();
+                    sbChild[i] = ('0' == child.bits[i] ? '1' : '0');
                 }
             }
+
+            child.bits = sbChild.ToString();
             return child;
         }
-
-        /* FUNCTIONS TO DEFINE (for each problem):
-        Func<Ind> createIndividual;                                 ==> input is nothing, output is a new individual
-        Func<Ind,double> computeFitness;                            ==> input is one individual, output is its fitness
-        Func<Ind[],double[],Func<Tuple<Ind,Ind>>> selectTwoParents; ==> input is an array of individuals (population) and an array of corresponding fitnesses, output is a function which (without any input) returns a tuple with two individuals (parents)
-        Func<Tuple<Ind, Ind>, Tuple<Ind, Ind>> crossover;           ==> input is a tuple with two individuals (parents), output is a tuple with two individuals (offspring/children)
-        Func<Ind, double, Ind> mutation;                            ==> input is one individual and mutation rate, output is the mutated individual
-        */
 
     }
 }
