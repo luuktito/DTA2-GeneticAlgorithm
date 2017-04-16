@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace GeneticAlgorithm
 {
@@ -26,9 +27,10 @@ namespace GeneticAlgorithm
             this.digits = digits;
         }
 
-        //Func<Ind> CreateIndividual, Func<Ind,double> ComputeFitness, Func<Ind[],double[],Func<Tuple<Ind,Ind>>> SelectTwoParents, Func<Tuple<Ind, Ind>, Tuple<Ind, Ind>> Crossover, Func< Ind, double, Ind> Mutation
         public Ind Run()
         {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             // initialize the first population
             var initialPopulation = Enumerable.Range(0, populationSize).Select(i => CreateIndividual()).ToArray();
 
@@ -80,12 +82,14 @@ namespace GeneticAlgorithm
 
                 //the new population becomes the current one
                 currentPopulation = nextPopulation;
-
-                //in case it's needed, check here some convergence condition to terminate the generations loop earlier
             }
 
             //recompute the fitnesses on the final population and return the best individual
             var finalFitnesses = Enumerable.Range(0, populationSize).Select(i => ComputeFitness(currentPopulation[i])).ToArray();
+            Console.WriteLine("Run Time: " + sw.Elapsed);
+            Console.WriteLine("Average fitness of last population: " + finalFitnesses.Average());
+            Console.WriteLine("Best fitness of last population: " + finalFitnesses.Max());
+
             return currentPopulation.Select((individual, index) => new Tuple<Ind, double>(individual, finalFitnesses[index])).OrderByDescending(tuple => tuple.Item2).First().Item1;
         }
 
@@ -106,8 +110,8 @@ namespace GeneticAlgorithm
         {
             var totalProbability = fitnesses.Sum();
             var probabilitySelection = Enumerable.Range(0, populationSize).Select(i => fitnesses[i]/totalProbability).ToArray();
-
             var currentProbability = 0.0;
+
             Ind parent1 = new Ind();
             Ind parent2 = new Ind();
 
@@ -153,6 +157,5 @@ namespace GeneticAlgorithm
             child.bits = sbChild.ToString();
             return child;
         }
-
     }
 }

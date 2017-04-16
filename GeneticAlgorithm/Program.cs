@@ -10,11 +10,9 @@ namespace GeneticAlgorithm
     {
         static void Main(string[] args)
         {
-            GeneticAlgorithm fakeProblemGA = new GeneticAlgorithm(0.85, 0.05, false, 10, 8, 5); // CHANGE THE GENERIC TYPE (NOW IT'S INT AS AN EXAMPLE) AND THE PARAMETERS VALUES
+            GeneticAlgorithm fakeProblemGA = new GeneticAlgorithm(0.85, 0.05, true, 50, 100, 5);
             var solution = fakeProblemGA.Run();
-            Console.WriteLine("Solution: ");
-            Console.WriteLine(solution.bits);
-
+            Console.WriteLine("Best Individual: " + solution.bits + " (" + Convert.ToInt32(solution.bits, 2) + ")");
         }
     }
 }
